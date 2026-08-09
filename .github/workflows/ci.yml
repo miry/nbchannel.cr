@@ -2,11 +2,11 @@ name: NBChannel.cr CI
 
 on:
   schedule:
-    - cron:  '0 3 * * *'
+    - cron: "0 3 * * *"
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -16,17 +16,17 @@ jobs:
       image: crystallang/crystal
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: shards install
-    - name: Run tests
-      run: crystal spec -t -s
-    - name: Run Ameba
-      run: bin/ameba
-    - name: Build docs
-      run: crystal docs
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: shards install
+      - name: Run tests
+        run: crystal spec -t -s
+      - name: Run Ameba
+        run: bin/ameba
+      - name: Build docs
+        run: crystal docs
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
