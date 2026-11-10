@@ -1,0 +1,14 @@
+# syntax=docker/dockerfile:1.7
+
+ARG CRYSTAL_VERSION=1.22.2-alpine
+FROM docker.io/crystallang/crystal:${CRYSTAL_VERSION}
+
+ENV LANG=C.UTF-8
+
+WORKDIR /app
+
+COPY shard.yml shard.lock ./
+RUN shards install
+
+COPY . /app
+CMD ["crystal", "spec", "-t", "-s"]
